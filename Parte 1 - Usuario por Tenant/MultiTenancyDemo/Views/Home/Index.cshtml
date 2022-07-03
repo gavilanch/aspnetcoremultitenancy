@@ -1,0 +1,60 @@
+﻿@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <h3>Claims</h3>
+    @if (User.Identity is not null && User.Identity.IsAuthenticated)
+    {
+        @foreach (var claim in User.Claims)
+        {
+            <p>@claim.Type - @claim.Value</p>
+        }
+    }
+</div>
+
+<div>
+    <h3>Productos</h3>
+    @if (User.Identity is not null && User.Identity.IsAuthenticated)
+    {
+
+        <form method="post" class="row row-cols-lg-auto g-3 align-items-center">
+            <div class="col-12">
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del producto">
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Crear producto</button>
+            </div>
+        </form>
+
+        <ul>
+            @foreach (var producto in Model.Productos)
+            {
+                <li>@producto.Nombre</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Logueate para que puedas crear y visualizar productos!</p>
+    }
+
+</div>
+
+<div>
+    <h3>Países</h3>
+    <ul>
+        @foreach (var país in Model.Países)
+        {
+            <li>@país.Nombre</li>
+        }
+    </ul>
+</div>
