@@ -1,0 +1,22 @@
+﻿@model IndexPermisosDTO
+
+<h1>Administrar permisos de la empresa: @Model.NombreEmpresa</h1>
+
+<h5>Empleados:</h5>
+
+<ul>
+    @foreach (var empleado in Model.Empleados)
+    {
+        <li>
+            <div>
+                @empleado.Email
+            </div>
+            <div>
+                <a asp-controller="Permisos" 
+                asp-action="Administrar" 
+                asp-route-email="@empleado.Email" 
+                class="btn btn-primary">Administrar permisos</a>
+            </div>
+        </li>
+    }
+</ul>

@@ -1,0 +1,45 @@
+﻿@using MultiTenancyDemo.Entidades
+@model AdministrarPermisosDTO
+
+<h1>Administrar permisos de @Model.Email</h1>
+
+<form asp-action="Administrar">
+    <input type="hidden" asp-for=UsuarioId />
+    <input type="hidden" asp-for=Email />
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <button type="button" class="btn btn-secondary" 
+    onclick="realizarSeleccion(true)">Seleccionar todos</button>
+    <button type="button" class="btn btn-secondary" 
+    onclick="realizarSeleccion(false)">Deseleccionar todos</button>
+
+    <ul>
+        @for (var i = 0; i < Model.Permisos.Count; i++)
+        {
+            <li>
+                <input
+                    id="permisos[@i].loTiene"
+                    name="permisos[@i].loTiene"
+                    value="true"
+                    type="checkbox" @(Model.Permisos[i].LoTiene ? "checked" : string.Empty)
+                   @(Model.Permisos[i].Permiso == Permisos.Nulo ? "disabled" : string.Empty) />
+                <input type="hidden" value="@Model.Permisos[i].Permiso" name="permisos[@i].permiso" />
+                <span>@Model.Permisos[i].Descripcion</span>
+            </li>
+        }
+    </ul>
+</form>
+
+@section Scripts{
+    <script>
+        function realizarSeleccion(checked) {
+            const checks = document.querySelectorAll("input[type=checkbox]");
+
+            checks.forEach(v => {
+                if (!v.disabled) {
+                    v.checked = checked;
+                }
+            });
+        }
+    </script>
+}

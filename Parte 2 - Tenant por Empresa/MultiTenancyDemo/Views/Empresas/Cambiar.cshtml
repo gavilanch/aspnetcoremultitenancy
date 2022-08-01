@@ -1,0 +1,20 @@
+﻿@using MultiTenancyDemo.Entidades
+@model List<Empresa>
+
+<h1>Escoge la empresa con la que deseas trabajar</h1>
+
+@if (Model.Count() == 0)
+{
+    <p>No hay empresas disponibles.</p>
+}
+else
+{
+    <form asp-action="Cambiar">
+        <div class="list-group">
+            @foreach (var empresa in Model)
+            {
+                <button type="submit" asp-route-id="@empresa.Id" class="list-group-item list-group-item-action">@empresa.Nombre</button>
+            }
+        </div>
+    </form>
+}

@@ -1,0 +1,25 @@
+﻿@using MultiTenancyDemo.Entidades
+@model VincularUsuario
+
+<h1>Vincular usuario</h1>
+<h5>Vincular usuarios a: @Model.NombreEmpresa</h5>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-action="Vincular">
+    <input type="hidden" asp-for="EmpresaId" />
+    <input type="hidden" asp-for="NombreEmpresa" />
+
+    <div class="mb-3">
+        <label asp-for="EmailUsuario" class="form-label"></label>
+        <input type="text" asp-for="EmailUsuario" class="form-control" />
+        <span asp-validation-for="EmailUsuario" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <a class="btn btn-secondary" asp-action="Index" asp-controller="Home">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
